@@ -1,0 +1,3 @@
+Interface\IPointInteretFichierService.class
+model\PointInteret.class
+service\PointInteretFichierCsvService.class

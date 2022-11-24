@@ -13,9 +13,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Service de test qui test la récupération des points d'intérêt à partir d'un fichier csv.
+ */
 class PointInteretFichierCsvServiceTest {
     private final PointInteretFichierCsvService pointInteretFichierCSVService = new PointInteretFichierCsvService();
 
+    /**
+     * test de la récupération des points interets du csv.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void recuperation_des_points_interets_du_csv() throws IOException {
         //GIVEN

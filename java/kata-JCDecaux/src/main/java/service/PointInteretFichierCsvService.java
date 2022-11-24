@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * @author Yann Ducloux
+ * Service qui gére la récupération des points d'intérêt à partir d'un fichier csv.
+ */
 public class PointInteretFichierCsvService implements IPointInteretFichierService {
     /**
      * The Identifiant.

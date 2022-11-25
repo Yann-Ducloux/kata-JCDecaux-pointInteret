@@ -4,10 +4,7 @@ import Interface.IZoneDenseService;
 import model.PointInteret;
 import model.ZoneDense;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -17,11 +14,11 @@ public class ZoneDenseService implements IZoneDenseService {
     /**
      * The Arrondi inférieur.
      */
-    static final float ARRONDI_INF = 0.5f;
+    private static final float ARRONDI_INF = 0.5f;
     /**
      * The Deux.
      */
-    static final float DEUX = 2;
+    private static final float DEUX = 2;
     @Override
     public List<ZoneDense> recuperer(List<PointInteret> pointInterets) {
         List<ZoneDense> zoneDensExcels = touteLesZones(pointInterets);
@@ -33,16 +30,17 @@ public class ZoneDenseService implements IZoneDenseService {
     public List<ZoneDense> calculer(List<ZoneDense> zoneResponses) {
         long nombreMaximumPointInteretDansZone = nombreMaximumPointInteretDansZoneLesPlusDense(zoneResponses);
         Map<ZoneDense, Long> mapZoneDense =
-                zoneResponses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-        mapZoneDense.values().removeIf(l -> l< nombreMaximumPointInteretDansZone);
+                zoneResponses.stream().collect(Collectors.groupingBy(zoneDense -> zoneDense, Collectors.counting()));
+        mapZoneDense.values().removeIf(nombrePointInteret -> nombrePointInteret< nombreMaximumPointInteretDansZone);
         return new ArrayList(mapZoneDense.keySet());
     }
     @Override
     public long nombreMaximumPointInteretDansZoneLesPlusDense(List<ZoneDense> zoneResponses) {
-        return zoneResponses.stream()
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()))
-                .values().stream()
-                .max(Comparator.comparing(a->a))
+        Collection<Long> compteurZoneDenses =  zoneResponses.stream()
+                .collect(Collectors.groupingBy(zoneDense -> zoneDense, Collectors.counting()))
+                .values();
+        return compteurZoneDenses.stream()
+                .max(Comparator.comparing(nombrePointInteret->nombrePointInteret))
                 .get();
     }
     @Override

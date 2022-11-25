@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * service qui gére le service les points interets d'une zone.
  */
-public class PointInteretZoneService implements IZoneService {
+public class ZoneService implements IZoneService {
 
     /**
      * The Increment.
